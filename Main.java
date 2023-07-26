@@ -1,8 +1,57 @@
-import Winners.WinnersShirt;
-import javax.swing.*;
+
+import javax.sound.sampled.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+
+        Scanner scanner = new Scanner(System.in);
+
+        File mySound = new File("I Had a Feeling.wav");
+        AudioInputStream audio = AudioSystem.getAudioInputStream(mySound);
+        Clip clip = AudioSystem.getClip();
+        clip.open(audio);
+
+
+        String response = "";
+
+        while (!response.equals("Q")) {
+            System.out.println("P = play, S = Stop, R = Reset, Q = Quit");
+            System.out.print("Enter your choice: ");
+            response = scanner.next();
+
+            response = response.toUpperCase();
+
+            switch (response) {
+                case ("P"): clip.start();
+                break;
+                case ("S"): clip.stop();
+                break;
+                case ("R"): clip.setMicrosecondPosition(0);
+                break;
+                case ("Q"): clip.close();
+                break;
+                default: System.out.println("Not a valid response");
+            }
+
+        }
+
+
+
+
+
+        /*File file = new File("secret");
+
+        if (file.exists()){
+            System.out.println("Exists Bro");
+        } else {
+            System.out.println("doesn't exist");
+        }
+
 
         String accessCode = "password";
 
@@ -54,7 +103,7 @@ public class Main {
         JOptionPane.showMessageDialog(null, WinnersShirt.winnersShirts);
         JOptionPane.showMessageDialog(null, WinnersShirt.winnersShirts.get(0).getName());
 
-        System.out.println(WinnersShirt.winnersShirts.get(1).getDesigner());
+        System.out.println(WinnersShirt.winnersShirts.get(1).getDesigner());*/
 
 
         /*int view = JOptionPane.showConfirmDialog(null,
@@ -76,10 +125,6 @@ public class Main {
             JOptionPane.showMessageDialog(null, "Thanks for visiting Bramlea City Centre");
             System.exit(0);
         }*/
-
-
-
-
 
     }
 }
